@@ -3,7 +3,7 @@ resources:
     type: GitRepo
     configuration:
       gitProvider: rajGit                       # <-- replace with your integration
-      path: RjSH1/jfrog-pipelines-docker-sample    # <-- replace with your repository name
+      path: RjSH1/jfrog-pipelines-docker-sample_1    # <-- replace with your repository name
       branches:
         include: master
 
