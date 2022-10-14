@@ -11,8 +11,8 @@ resources:
     type: Image
     configuration:
       registry: rajArt                                # <-- replace with your artifactory integration
-      sourceRepository: docker_local               # <-- required if registry is Artifactory
-      imageName: demo.jfrog-pipelines.com/docker-local/dbp  # < -- replace with your image path and name
+      sourceRepository: docker-new-local               # <-- required if registry is Artifactory
+      imageName: new10oct.jfrogdev.org/docker-local/dbp  # < -- replace with your image path and name
       imageTag: latest
       autoPull: true
       
@@ -40,7 +40,7 @@ pipelines:
           affinityGroup: dbp_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: demo.jfrog-pipelines.com/docker-local/dbp  # replace with your image path and name
+          dockerImageName: demo.jfrog-pipelines.com/docker-new-local/dbp  # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
             - name: dbp_repo
