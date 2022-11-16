@@ -33,6 +33,8 @@ resources:
 
 pipelines:
   - name: pipeline_dbp
+    configuration:
+      jfrogCliVersion: 2    
     steps:
       - name: docker_build
         type: DockerBuild
