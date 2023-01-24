@@ -2,7 +2,7 @@ resources:
   - name: dbp_repo
     type: GitRepo
     configuration:
-      gitProvider: ACMEGit                            # <-- replace with your integration 
+      gitProvider: myGithub                            # <-- replace with your integration 
       path: RjSH1/jfrog-pipelines-docker-sample_1     # <-- replace with your repository name
       branches:
         include: master
@@ -10,23 +10,23 @@ resources:
   - name: dbp_image
     type: Image
     configuration:
-      registry: rajArt                                # <-- replace with your artifactory integration
-      sourceRepository: acme-docker-local                  # <-- required if registry is Artifactory
-      imageName: pipdemo.jfrog.io/acme-docker-local/dbp    # < -- replace with your image path and name
+      registry: myArtifactory                                # <-- replace with your artifactory integration
+      sourceRepository: quickstart-docker-local                  # <-- required if registry is Artifactory
+      imageName: pipdemo.jfrog.io/quickstart-docker-local/dbp    # < -- replace with your image path and name
       imageTag: latest
       autoPull: true
       
   - name: dbp_build_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: ACMEArt                            # <-- replace with your artifactory integration
+      sourceArtifactory: myArtifactory                            # <-- replace with your artifactory integration
       buildName: dbp_build
       buildNumber: 1    
 
   - name: dbp_promoted_build_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: ACMEArt                            # <-- replace with your artifactory integration
+      sourceArtifactory: myArtifactory                             # <-- replace with your artifactory integration
       buildName: dbp_build
       buildNumber: 1
       
@@ -42,20 +42,20 @@ pipelines:
           affinityGroup: dbp_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: pipdemo.jfrog.io/acme-docker-local/dbp  # replace with your image path and name
+          dockerImageName: pipdemo.jfrog.io/quickstart-docker-local/dbp  # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
             - name: dbp_repo
           integrations:
-            - name: ACMEArt                            # <-- replace with your artifactory integration
+            - name: myArtifactory                             # <-- replace with your artifactory integration
 
       - name: docker_push
         type: DockerPush
         configuration:
           affinityGroup: dbp_group
-          targetRepository: acme-target-local               # <-- replace with your target local repo
+          targetRepository: quickstart-target-local               # <-- replace with your target local repo
           integrations:
-            - name: ACMEArt                            # <-- replace with your artifactory integration
+            - name: myArtifactory                            # <-- replace with your artifactory integration
           inputSteps:
             - name: docker_build
           outputResources:
@@ -72,9 +72,9 @@ pipelines:
       - name: promote_dbp_build
         type: PromoteBuild
         configuration:
-          targetRepository: acme-target-local               # <-- replace with your target local repo
+          targetRepository: quickstart-target-local               # <-- replace with your target local repo
           integrations:
-            - name: ACMEArt                            # <-- replace with your artifactory integration
+            - name: myArtifactory                             # <-- replace with your artifactory integration
           inputResources:
             - name: dbp_build_info
           outputResources:
