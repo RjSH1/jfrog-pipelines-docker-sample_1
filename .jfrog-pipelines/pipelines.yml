@@ -50,8 +50,8 @@ pipelines:
             - name: myArtifactory                             # <-- replace with your artifactory integration
         execution:
           onStart:
-              - msg="Run description updated from step $step_id"
-              - update_run_description "$msg"             
+              # - msg="Run description updated from step $step_id"
+              - update_run_description "DockerBuild native step performs a build to produce a Docker image from a Dockerfile in a GitRepo  source repository resource."             
 
       - name: docker_push
         type: DockerPush
