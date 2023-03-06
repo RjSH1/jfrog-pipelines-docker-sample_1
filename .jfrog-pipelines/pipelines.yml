@@ -48,6 +48,10 @@ pipelines:
             - name: dbp_repo
           integrations:
             - name: myArtifactory                             # <-- replace with your artifactory integration
+        execution:
+          onStart:
+              - msg="Run description updated from step $step_id"
+              - update_run_description "$msg"             
 
       - name: docker_push
         type: DockerPush
