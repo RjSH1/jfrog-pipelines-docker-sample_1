@@ -58,6 +58,8 @@ pipelines:
         configuration:
           integrations:
             - name: {{.jfrog-pipelines.localArtifactory}}
+          inputSteps:
+            - name: docker_build            
         execution:
           onExecute:
             - echo "first_step"
